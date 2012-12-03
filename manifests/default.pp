@@ -18,6 +18,24 @@ class must-have {
   package { "tmux":
     ensure => present,
   }
+
+  package { "curl":
+    ensure => present,
+  }
+
+  package { "bash":
+    ensure => present,
+  }
+
+  exec {
+    "install_cfg":
+    command => "curl -Lks git.io/cfg | HOME=/home/vagrant bash",
+    cwd => "/home/vagrant",
+    user => "vagrant",
+    path    => "/usr/bin/:/bin/",
+    require => Package["curl"],
+    logoutput => true,
+  }
 }
 
 include must-have
