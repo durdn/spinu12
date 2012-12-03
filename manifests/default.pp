@@ -36,6 +36,17 @@ class must-have {
     require => Package["curl"],
     logoutput => true,
   }
+
+  exec {
+    "install_submodules":
+    command => "cd /home/vagrant/.cfg && git submodule update --init",
+    provider => "shell",
+    cwd => "/home/vagrant/.cfg",
+    user => "vagrant",
+    path    => "/usr/bin/:/bin/",
+    require => Exec["install_cfg"],
+    logoutput => true,
+  }
 }
 
 include must-have
