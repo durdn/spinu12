@@ -35,6 +35,7 @@ class must-have {
     path    => "/usr/bin/:/bin/",
     require => Package["curl"],
     logoutput => true,
+    creates => "/home/vagrant/.cfg",
   }
 
   exec {
@@ -45,7 +46,8 @@ class must-have {
     user => "vagrant",
     path    => "/usr/bin/:/bin/",
     require => Exec["install_cfg"],
-    logoutput => true,
+    logoutput => "true",
+    creates => "/home/vagrant/.cfg/.vim/bundle/scrooloose-nerdtree",
   }
 }
 
