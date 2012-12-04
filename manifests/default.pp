@@ -3,9 +3,9 @@ class must-have {
     command => '/usr/bin/apt-get update'
   }
 
-  package { "git-core":
-    ensure => present,
-  }
+  /*package { "git-core":*/
+    /*ensure => present,*/
+  /*}*/
 
   package { "vim":
     ensure => present,
@@ -49,6 +49,22 @@ class must-have {
     logoutput => "true",
     creates => "/home/vagrant/.cfg/.vim/bundle/scrooloose-nerdtree",
   }
-}
+} 
 
 include must-have
+
+rbenv::install { "vagrant":
+  group => 'vagrant',
+  home  => '/home/vagrant'
+}
+
+rbenv::compile { "1.9.3-p327":
+  user => "vagrant",
+  home => "/home/vagrant",
+  global => true,
+}
+
+/*rbenv::gem { "bundler":*/
+  /*user => "vagrant",*/
+  /*ruby => "1.9.3-p327",*/
+/*}*/
