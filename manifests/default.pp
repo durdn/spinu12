@@ -52,10 +52,21 @@ class must-have {
 } 
 
 include must-have
+include apt
+
+apt::ppa { "ppa:chris-lea/node.js": }
+
+include nodejs
+
+package { "coffee-script":
+  ensure   => latest,
+  provider => 'npm',
+  require => Package['npm'],
+}
 
 rbenv::install { "vagrant":
   group => 'vagrant',
-  home  => '/home/vagrant'
+  home  => '/home/vagrant',
 }
 
 rbenv::compile { "1.9.3-p327":
@@ -64,7 +75,8 @@ rbenv::compile { "1.9.3-p327":
   global => true,
 }
 
-/*rbenv::gem { "bundler":*/
-  /*user => "vagrant",*/
-  /*ruby => "1.9.3-p327",*/
-/*}*/
+rbenv::gem { "middleman":
+  user => "vagrant",
+  ruby => "1.9.3-p327",
+  require => Package["coffee-script"],
+}

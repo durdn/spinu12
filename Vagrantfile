@@ -8,7 +8,7 @@ Vagrant::Config.run do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "base"
-  config.vm.provision :puppet, :facter => { "osfamily" => "debian" }, :module_path => "modules", :options => "--verbose --debug" do |puppet|
+  config.vm.provision :puppet, :module_path => "modules", :options => "--verbose --debug" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file  = "default.pp"
     puppet.options = %w[ --libdir=\\$modulepath/rbenv/lib ]
