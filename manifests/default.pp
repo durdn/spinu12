@@ -3,28 +3,14 @@ class must-have {
     command => '/usr/bin/apt-get update'
   }
 
-  package { "git-core":
+  package { ["vim",
+             "screen",
+             "tmux",
+             "curl",
+             "git-core",
+             "bash"]:
     ensure => present,
-  }
-
-  package { "vim":
-    ensure => present,
-  }
-
-  package { "screen":
-    ensure => present,
-  }
-
-  package { "tmux":
-    ensure => present,
-  }
-
-  package { "curl":
-    ensure => present,
-  }
-
-  package { "bash":
-    ensure => present,
+    require => Exec["apt-get update"],
   }
 
   exec {
@@ -33,7 +19,7 @@ class must-have {
     cwd => "/home/vagrant",
     user => "vagrant",
     path    => "/usr/bin/:/bin/",
-    require => Package["curl"],
+    require => Package["curl", "git-core"],
     logoutput => true,
     creates => "/home/vagrant/.cfg",
   }
@@ -49,6 +35,6 @@ class must-have {
     logoutput => "true",
     creates => "/home/vagrant/.cfg/.vim/bundle/scrooloose-nerdtree",
   }
-}
+} 
 
 include must-have
