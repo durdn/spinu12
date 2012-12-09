@@ -79,8 +79,13 @@ package { "coffee-script":
   require => Package["npm"],
 }
 
+package { ["libcurl4-openssl-dev"]:
+  ensure => present,
+  require => Exec["apt-get update"],
+}
+
 rbenv::gem { "middleman":
   user => "vagrant",
   ruby => "1.9.3-p327",
-  require => Package["coffee-script"],
+  require => Package["coffee-script", "libcurl4-openssl-dev"],
 }
