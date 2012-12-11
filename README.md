@@ -10,8 +10,6 @@ These are the 2012 Vagrant configurations for my development virtual machines. E
     
     cd spinu12
     
-    vagrant init
-    
     vagrant up
     
 ## Enjoy with
