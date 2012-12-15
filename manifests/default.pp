@@ -27,6 +27,7 @@ class must-have {
     logoutput => true,
     creates => "/home/vagrant/.cfg",
   }
+}
 
 include must-have
 
