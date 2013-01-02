@@ -12,7 +12,12 @@ class must-have {
 
   exec { 'apt-get update':
     command => '/usr/bin/apt-get update',
-    require => Apt::Ppa["ppa:webupd8team/java"],
+    before => Apt::Ppa["ppa:webupd8team/java"],
+  }
+
+  exec { 'apt-get update 2':
+    command => '/usr/bin/apt-get update',
+    require => [ Apt::Ppa["ppa:webupd8team/java"], Package["git-core"] ],
   }
 
   package { ["vim",
@@ -20,10 +25,15 @@ class must-have {
              "tmux",
              "curl",
              "git-core",
-             "bash",
-             "oracle-java7-installer"]:
+             "bash"]:
     ensure => present,
     require => Exec["apt-get update"],
+    before => Apt::Ppa["ppa:webupd8team/java"],
+  }
+
+  package { ["oracle-java7-installer"]:
+    ensure => present,
+    require => Exec["apt-get update 2"],
   }
 
   exec {
