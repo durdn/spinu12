@@ -2,11 +2,12 @@
 
 http://www.atlassian.com/software/stash/overview
 
-## Install with
+## Install
 
 - Install Vagrant: http://www.vagrantup.com
 
 - Execute:
+
 
     vagrant box add base http://files.vagrantup.com/precise32.box
 
@@ -18,10 +19,14 @@ http://www.atlassian.com/software/stash/overview
     
     vagrant up
     
-## Enjoy with
+## Running Stash
+
+Start Stash via ssh with:
+
+    vagrant ssh
 
     cd /vagrant
 
     STASH_HOME=/vagrant/stash-home /vagrant/atlassian-stash-2.0.1/bin/start-stash.sh
 
-Access local browser at http://localhost:7990/setup
+Access host browser at http://localhost:7990/setup
